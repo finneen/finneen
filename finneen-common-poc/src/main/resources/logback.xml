@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 定义log记录日志 -->
+	<appender name="FILE"	class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 日志级别过滤 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch><!-- 匹配处理 -->
+			<onMismatch>DENY</onMismatch><!-- 不匹配拒绝 -->
+		</filter>
+		<!-- Log文件名 -->
+		<file>finneen-logout.log</file>
+		<!-- 按照大小压缩 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>/archive/finneen-logout%i.log</FileNamePattern>
+			<!-- <MinIndex>1</MinIndex> -->
+			<MaxIndex>5</MaxIndex><!-- 最多保存几个，轮询保存 -->
+		</rollingPolicy>
+		<!-- 超过10k就压缩 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1mb</MaxFileSize><!-- 每个文件最大 -->
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %relative %thread %mdc %level - %logger %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 定义另一个error记录日志 -->
+	<appender name="FILE-ERROR"	class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 日志级别过滤 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch><!-- 匹配处理 -->
+			<onMismatch>DENY</onMismatch><!-- 不匹配拒绝 -->
+		</filter>
+		<!-- Log文件名 -->
+		<file>finneen-logerr.log</file>
+		<!-- 按照大小压缩 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>/archive/finneen-logerr_%i.log</FileNamePattern>
+			<!-- <MinIndex>1</MinIndex> -->
+			<MaxIndex>5</MaxIndex><!-- 最多保存几个，轮询保存 -->
+		</rollingPolicy>
+		<!-- 超过10k就压缩 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1mb</MaxFileSize><!-- 每个文件最大 -->
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %relative %thread %mdc %level - %logger %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- additivity="false" -->
+	<logger name="com.finneen.poc" level="info"> 
+		<appender-ref ref="FILE-ERROR" />
+		<appender-ref ref="FILE" /> 
+	</logger>
+
+	<!-- eclipselink -->
+	<logger name="org.eclipse.persistence" level="info">
+		<appender-ref ref="stdout" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="stdout" />
+	</root>
+</configuration>
