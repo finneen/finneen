@@ -1,5 +1,4 @@
 Readme
 ======
 
-master
-dev
+finneen project
