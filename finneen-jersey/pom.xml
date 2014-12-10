@@ -50,6 +50,8 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>8.1.15.v20140411</version>
 				<configuration>
+					<stopKey>stop</stopKey>
+					<stopPort>1234</stopPort>
 					<reload>manual</reload>
 					<webAppConfig>
 						<contextPath>/${project.build.finalName}</contextPath>

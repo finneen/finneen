@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
 
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
 	<!-- 控制台输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -61,7 +63,7 @@
 	</appender>
 
 	<!-- additivity="false" -->
-	<logger name="cn.finneen.poc" level="info">
+	<logger name="cn.finneen" level="info">
 		<appender-ref ref="FILE-ERROR" />
 		<appender-ref ref="FILE" /> 
 	</logger>
@@ -69,11 +71,13 @@
 	<!-- eclipselink -->
 	<logger name="org.eclipse.persistence" level="info">
 		<appender-ref ref="stdout" />
+	</logger>
+
+	<logger name="org.springframework.web" level="">info
 		<appender-ref ref="FILE" />
 	</logger>
 
 	<root level="info">
 		<appender-ref ref="stdout" />
-		<appender-ref ref="FILE" />
 	</root>
 </configuration>
