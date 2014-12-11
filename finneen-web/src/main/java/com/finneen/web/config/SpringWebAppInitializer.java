@@ -21,7 +21,7 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"/", "/*"};
+		return new String[] {"/"};
 	}
 
 	@Override
@@ -30,14 +30,6 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
 		encodingFilter.setForceEncoding(true);
-
-		//shiro拦截器
-		//DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
-		//delegatingFilterProxy.setTargetFilterLifecycle(true);
-
-		//ShiroFilterFactoryBean shiroFilterFactoryBean = new Shiro
-
-		//ShiroFilter
 
 		return new Filter[] {encodingFilter};
 	}
