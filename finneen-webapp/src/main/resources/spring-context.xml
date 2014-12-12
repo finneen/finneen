@@ -15,6 +15,8 @@
 	<context:component-scan base-package="cn.yaofeng.finneen" />
 	
 	<!-- 开启AOP监听 只对当前配置文件有效 -->
-    <aop:aspectj-autoproxy expose-proxy="true"/>
+	<aop:aspectj-autoproxy expose-proxy="true"/>
+
+	<import resource="classpath*:spring-shiro.xml" />
 	
 </beans>

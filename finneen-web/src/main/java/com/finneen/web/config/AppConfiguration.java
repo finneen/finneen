@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Import;
  * Created by yaofeng on 2014/12/10.
  */
 @Configuration
-@Import(AdminConfiguration.class)
+@Import(value = {AdminConfiguration.class, ShiroConfiguration.class})
 public class AppConfiguration {
 }

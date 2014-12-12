@@ -18,6 +18,7 @@ public class HomeController {
 	@RequestMapping(value="/hello")
 	public Object hello(){
 		logger.info(st++ +"-hello-" + index++ + "-" + this.hashCode());
+		logger.error(new Exception("error") + "");
 		return "你好";
 	}
 }

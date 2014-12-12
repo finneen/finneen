@@ -61,7 +61,7 @@
 	</appender>
 
 	<!-- additivity="false" -->
-	<logger name="cn.yaofeng.finneen" level="info"> 
+	<logger name="com.finneen" level="info">
 		<appender-ref ref="FILE-ERROR" />
 		<appender-ref ref="FILE" /> 
 	</logger>
