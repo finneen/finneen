@@ -60,4 +60,8 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+
+	<!-- 静态资源不拦截 -->
+	<mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
+
 </beans>

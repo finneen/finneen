@@ -7,17 +7,27 @@
 	<packaging>pom</packaging>
 
 	<repositories>
-		<repository>
+		<!--<repository>
 			<id>nexus</id>
 			<name>nexus Releases</name>
 			<url>http://192.168.1.134:8081/nexus/content/groups/public/</url>
+		</repository>-->
+		<repository>
+			<id>oschina</id>
+			<name>oschina Releases</name>
+			<url>http://maven.oschina.net/content/groups/public</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
+		<!--<pluginRepository>
 			<id>nexus</id>
 			<name>nexus Releases</name>
 			<url>http://192.168.1.134:8081/nexus/content/groups/public/</url>
+		</pluginRepository>-->
+		<pluginRepository>
+			<id>oschina</id>
+			<name>oschina repo</name>
+			<url>http://maven.oschina.net/content/groups/public</url>
 		</pluginRepository>
 	</pluginRepositories>
 

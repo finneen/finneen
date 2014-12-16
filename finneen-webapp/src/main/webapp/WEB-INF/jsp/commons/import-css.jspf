@@ -1,0 +1,9 @@
+
+<!-- ace css -->
+<link rel="stylesheet" href="${ctx}/resources/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="${ctx}/resources/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${ctx}/resources/assets/css/ace.min.css" />
+<link rel="stylesheet" href="${ctx}/resources/assets/css/ace-rtl.min.css" />
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="${ctx}/resources/assets/css/ace-ie.min.css" />
+<![endif]-->
