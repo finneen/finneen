@@ -30,7 +30,10 @@
 		<eclipselink.version>2.5.2</eclipselink.version>
 		<postgresql.version>9.3-1101-jdbc4</postgresql.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
+		<commons-collections.version>4.0</commons-collections.version>
 		<shiro.version>1.2.3</shiro.version>
+		<druid.version>1.0.9</druid.version>
+		<mysql-connector-java.version>5.1.32</mysql-connector-java.version>
 	</properties>
 
 	<build>
@@ -225,11 +228,23 @@
 				<version>${postgresql.version}</version>
 			</dependency>
 
+			<!-- druid -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+
 			<!-- common -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${commons-collections.version}</version>
 			</dependency>
 
 			<!-- apache shiro 相关jar包 -->
@@ -262,6 +277,11 @@
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-quartz</artifactId>
 				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector-java.version}</version>
 			</dependency>
 
 		</dependencies>

@@ -7,3 +7,5 @@
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="${ctx}/resources/assets/css/ace-ie.min.css" />
 <![endif]-->
+
+<link rel="stylesheet" href="${ctx}/resources/assets/css/ace-skins.min.css"/>

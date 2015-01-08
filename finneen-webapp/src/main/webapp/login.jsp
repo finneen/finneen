@@ -8,16 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/jsp/commons/taglibs.jspf"%>
 <es:contentHeader title="cloudWeb"/>
-<%--<div id="login-page" class="container">
-  <h1>登录</h1>
-  <form id="login-form" method="post" class="well">
-    <input type="text" class="span2" name="username" placeholder="Email"><br>
-    <input type="password" class="span2" name="password" placeholder="Password"><br>
-    <label class="checkbox"> <input type="checkbox"  name="rememberMe"> 记住我 </label>
-    <button type="submit" class="btn btn-primary">登录</button>
-    <button type="submit" class="btn">忘记密码</button>
-  </form>
-</div>--%>
 
 <div class="main-container">
 <div class="main-content">

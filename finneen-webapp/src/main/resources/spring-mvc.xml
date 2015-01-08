@@ -17,7 +17,7 @@
 
 	<!-- 开启controller注解支持 -->
 	<context:component-scan
-					base-package="cn.yaofeng.finneen.**.web, cn.yaofeng.finneen.**.rest"
+					base-package="cn.yaofeng.finneen.**.controller, cn.yaofeng.finneen.**.rest"
 					use-default-filters="false">
 		<context:include-filter type="annotation"
 														expression="org.springframework.stereotype.Controller"/>

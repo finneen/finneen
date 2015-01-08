@@ -13,10 +13,20 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 		
 	<context:component-scan base-package="cn.yaofeng.finneen" />
+
+	<bean id="dbConfPostProcessor"
+				class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- 开启AOP监听 只对当前配置文件有效 -->
 	<aop:aspectj-autoproxy expose-proxy="true"/>
 
-	<import resource="classpath*:spring-shiro.xml" />
+	<import resource="spring-datasource.xml" />
+	<import resource="spring-tx.xml" />
 	
 </beans>

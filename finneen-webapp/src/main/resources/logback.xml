@@ -4,7 +4,9 @@
 	<!-- 控制台输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+			<pattern>
+				%d [%relative] [%thread] %-5p %c[%L] - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 
@@ -30,7 +32,9 @@
 			<MaxFileSize>1mb</MaxFileSize><!-- 每个文件最大 -->
 		</triggeringPolicy>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %relative %thread %mdc %level - %logger %msg%n</pattern>
+			<pattern>
+				%d [%relative] [%thread] %-5p %c[%L] - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 
@@ -56,7 +60,7 @@
 			<MaxFileSize>1mb</MaxFileSize><!-- 每个文件最大 -->
 		</triggeringPolicy>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %relative %thread %mdc %level - %logger %msg%n</pattern>
+			<pattern>%d [%relative] [%thread] %-5p %c[%L] - %msg%n</pattern>
 		</encoder>
 	</appender>
 

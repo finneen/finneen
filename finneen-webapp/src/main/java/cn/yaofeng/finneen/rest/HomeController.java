@@ -21,4 +21,6 @@ public class HomeController {
 		logger.error(new Exception("error") + "");
 		return "你好";
 	}
+
+
 }
