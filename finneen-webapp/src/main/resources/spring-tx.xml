@@ -15,10 +15,11 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd"
 	default-lazy-init="false">
 
+	<tx:annotation-driven />
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
-	    <property name="dataSource" ref="dataSource"></property>  
-	</bean>  
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf"/>
+	</bean>
 
 	<!-- 基本事务定义,使用transactionManager作事务管理,默认find*方法的事务为readonly -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -32,15 +33,13 @@
 				rollback-for="Exception" />
 			<tx:method name="delete*" propagation="REQUIRED"   isolation="READ_UNCOMMITTED"  timeout="36000"
 				rollback-for="Exception" />
-			<tx:method name="create*" read-only="true" isolation="READ_UNCOMMITTED"
-				timeout="36000" />
+			<tx:method name="create*" read-only="true" isolation="READ_UNCOMMITTED"	timeout="36000" />
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
 		<!-- 切面事务操作-->
-		<aop:pointcut id="servicePointcut"
-			expression="execution(* cn.yaofeng.finneen.*Service.*(..))" />
+		<aop:pointcut id="servicePointcut" expression="execution(* cn.yaofeng.finneen.*Service.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
 	</aop:config>
 

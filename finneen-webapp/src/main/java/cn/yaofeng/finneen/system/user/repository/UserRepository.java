@@ -1,5 +1,6 @@
-package cn.yaofeng.finneen.rest;
+package cn.yaofeng.finneen.system.user.repository;
 
+import cn.yaofeng.finneen.system.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

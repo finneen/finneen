@@ -39,6 +39,6 @@
 		<property name="showSql" value="true" />
 	</bean>
 
-	<jpa:repositories base-package="cn.yaofeng.finneen" entity-manager-factory-ref="emf" />
+	<jpa:repositories base-package="cn.yaofeng.finneen" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
 
 </beans>
