@@ -2,10 +2,17 @@ package cn.yaofeng.finneen.test.system;
 
 import cn.yaofeng.finneen.system.permission.entity.Permission;
 import cn.yaofeng.finneen.system.permission.repository.PermissionRepository;
+import cn.yaofeng.finneen.system.resource.entity.Resource;
+import cn.yaofeng.finneen.system.resource.repository.ResourceRepository;
 import cn.yaofeng.finneen.system.role.entity.Role;
 import cn.yaofeng.finneen.system.role.repository.RoleRepository;
 import cn.yaofeng.finneen.system.user.entity.User;
 import cn.yaofeng.finneen.system.user.repository.UserRepository;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +21,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Finneen on 2015/1/10.
@@ -30,6 +41,8 @@ public class UserRepositoryTest {
     private RoleRepository roleRepository;
     @Autowired
     private PermissionRepository permissionRepository;
+    @Autowired
+    private ResourceRepository resourceRepository;
 
     @Test
     public void testSaveUser() {
@@ -41,11 +54,37 @@ public class UserRepositoryTest {
     }
 
     @Test
+    public void testSaveResource() {
+        Resource resource = new Resource();
+        resource.setResourceName("res-1");
+
+        resourceRepository.save(resource);
+    }
+
+    @Test
     public void testSavePermission() {
         Permission permission = new Permission();
-        permission.setPermissionName("perm");
+        permission.setPermissionName("perm-1");
+
+        //Permission permission = permissionRepository.findOne(1L);
+        Resource resource = resourceRepository.findOne(1L);
+
+        permission.addResource(resource);
 
         permissionRepository.save(permission);
+    }
+
+    @Test
+    public void testDelResource() {
+        Permission permission = permissionRepository.findOne(2L);
+
+        Resource resource = resourceRepository.findOne(1L);
+
+
+        permission.getResources().remove(resource);
+
+        permissionRepository.save(permission);//接触关系
+        resourceRepository.delete(1L);//删除数据
     }
 
     @Test
@@ -64,16 +103,18 @@ public class UserRepositoryTest {
     public void testSaveUserRole() {
         //user 为关系维护方
 
-        //User user = userRepository.findOne(1L);
-        User user = new User();
-        user.setUserName("finneen");
+        User user = userRepository.findOne(1L);
 
         //roleRepository.save(role);
 
-        Role r = roleRepository.findOne(1L);
+        Role r = roleRepository.findOne(2L);
+        /*Role r = new Role();
+        r.setRoleName("rol-1");*/
 
-        user.addRole(r);
-        userRepository.save(user);
+        //user.addRole(r);
+        r.addUser(user);
+
+        roleRepository.save(r);
 
     }
 
@@ -85,5 +126,25 @@ public class UserRepositoryTest {
 
 
         logger.info("role:{}", ((Role)(u.getRoles().toArray()[0])).getRoleName());
+    }
+
+    @Test
+    public void findPerm() {
+        List<Permission> list = permissionRepository.findAll();
+        logger.info("perms: {}" , ReflectionToStringBuilder.toString(list));
+    }
+
+    @Test
+    public void findStringRoleFromUser() {
+        User user = userRepository.findOne(1L);
+        Set<Role> roles = user.getRoles();
+
+        Set<String> roles_str = Sets.newHashSet(Collections2.transform(roles, new Function<Role, String>() {
+            @Override
+            public String apply(Role input) {
+                return input.getRoleName();
+            }
+        }));
+
     }
 }

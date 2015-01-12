@@ -19,7 +19,9 @@ public class Role extends BaseEntity<Long> {
     @Column(nullable = false, unique = true)
     private String roleName;
 
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "roles")
+    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "t_sys_role_user", joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<User> users = new HashSet<User>();
 
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
@@ -49,6 +51,10 @@ public class Role extends BaseEntity<Long> {
 
     public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
     }
 
     public void addPermission(Permission permission) {

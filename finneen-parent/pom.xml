@@ -36,6 +36,7 @@
 		<druid.version>1.0.9</druid.version>
 		<mysql-connector-java.version>5.1.32</mysql-connector-java.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
+		<guava.version>15.0</guava.version>
 	</properties>
 
 	<build>
@@ -312,6 +313,12 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
 			</dependency>
 
 		</dependencies>

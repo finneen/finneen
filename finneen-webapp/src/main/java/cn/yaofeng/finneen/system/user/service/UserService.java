@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface UserService {
 
-    public User save(User u);
+    User save(User u);
 
     List<User> findAll();
+
+    User findOne(Long id);
 }

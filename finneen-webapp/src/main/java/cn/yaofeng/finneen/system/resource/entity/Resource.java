@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * Created by Finneen on 2015/1/11.
  */
 @Entity
-@Table(name = "t_resource")
+@Table(name = "t_sys_resource")
 public class Resource extends BaseEntity<Long> {
 
     @Column(nullable = false, unique = true)

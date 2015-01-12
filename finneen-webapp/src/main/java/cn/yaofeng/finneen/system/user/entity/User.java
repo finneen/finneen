@@ -18,9 +18,7 @@ public class User extends BaseEntity<Long>{
     @Column(nullable = false, unique = true)
     private String userName;
 
-    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinTable(name = "t_sys_user_role", joinColumns = {@JoinColumn(name = "user_id")},
-        inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "users")
     private Set<Role> roles = new HashSet<Role>();
 
     public Set<Role> getRoles() {
@@ -37,10 +35,6 @@ public class User extends BaseEntity<Long>{
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public void addRole(Role role) {
-        roles.add(role);
     }
 
     @Override

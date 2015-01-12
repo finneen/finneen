@@ -1,9 +1,7 @@
 package cn.yaofeng.finneen.system.permission.entity;
 
 import cn.yaofeng.finneen.core.entity.BaseEntity;
-import cn.yaofeng.finneen.system.operation.entity.Operation;
 import cn.yaofeng.finneen.system.resource.entity.Resource;
-import cn.yaofeng.finneen.system.role.entity.Role;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.persistence.*;
@@ -20,8 +18,10 @@ public class Permission extends BaseEntity<Long> {
     @Column(nullable = false, unique = true)
     private String permissionName;
 
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "permissions")
-    private Set<Role> roles = new HashSet<Role>();
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "t_sys_perm_res", joinColumns = {@JoinColumn(name = "perm_id")},
+        inverseJoinColumns = {@JoinColumn(name = "res_id")})
+    private Set<Resource> resources = new HashSet<Resource>();
 
     public String getPermissionName() {
         return permissionName;
@@ -31,12 +31,16 @@ public class Permission extends BaseEntity<Long> {
         this.permissionName = permissionName;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<Resource> getResources() {
+        return resources;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setResources(Set<Resource> resources) {
+        this.resources = resources;
+    }
+
+    public void addResource(Resource resource) {
+        resources.add(resource);
     }
 
     @Override
