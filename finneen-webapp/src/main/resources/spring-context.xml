@@ -29,4 +29,5 @@
 	<import resource="spring-datasource.xml" />
 	<import resource="spring-tx.xml" />
 	<import resource="spring-data-jpa.xml" />
+	<import resource="spring-shiro.xml" />
 </beans>

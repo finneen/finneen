@@ -47,7 +47,8 @@ public class UserRepositoryTest {
     @Test
     public void testSaveUser() {
         User user = new User();
-        user.setUserName("admin");
+        user.setUserName("管理员");
+        user.setAccount("admin");
 
         User result = userRepository.save(user);
         Assert.assertEquals(user, result);
@@ -83,7 +84,7 @@ public class UserRepositoryTest {
 
         permission.getResources().remove(resource);
 
-        permissionRepository.save(permission);//接触关系
+        permissionRepository.save(permission);//解除关系
         resourceRepository.delete(1L);//删除数据
     }
 

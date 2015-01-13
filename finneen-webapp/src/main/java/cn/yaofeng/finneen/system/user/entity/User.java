@@ -15,8 +15,13 @@ import java.util.Set;
 @Table(name = "t_sys_user")
 public class User extends BaseEntity<Long>{
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userName;
+
+    @Column(nullable = false, unique = true)
+    private String account;
+
+    private String password;
 
     @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "users")
     private Set<Role> roles = new HashSet<Role>();
@@ -35,6 +40,22 @@ public class User extends BaseEntity<Long>{
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
