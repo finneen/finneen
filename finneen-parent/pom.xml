@@ -20,7 +20,7 @@
 		<log.logback.version>1.1.2</log.logback.version>
 		<slf4j.version>1.7.6</slf4j.version>
 		<spring.version>4.1.2.RELEASE</spring.version>
-		<spring_data_jpa.version>1.7.1.RELEASE</spring_data_jpa.version>
+		<spring_data_jpa.version>1.6.1.RELEASE</spring_data_jpa.version>
 		<spring_boot.version>1.1.9.RELEASE</spring_boot.version>
 		<servlet.version>3.0.1</servlet.version>
 		<jsp.version>2.2</jsp.version>

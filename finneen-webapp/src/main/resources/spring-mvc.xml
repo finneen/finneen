@@ -64,4 +64,11 @@
     <!-- 静态资源不拦截 -->
     <mvc:resources mapping="/resources/**" location="WEB-INF/resources/"/>
 
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix"  value="/WEB-INF/jsp/" />
+        <property name="suffix"  value=".jsp"/>
+        <property name="order" value="1" />
+    </bean>
+
 </beans>

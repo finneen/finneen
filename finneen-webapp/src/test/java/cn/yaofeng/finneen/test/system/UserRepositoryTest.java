@@ -1,5 +1,6 @@
 package cn.yaofeng.finneen.test.system;
 
+import cn.yaofeng.finneen.secutiry.utils.SecUtils;
 import cn.yaofeng.finneen.system.permission.entity.Permission;
 import cn.yaofeng.finneen.system.permission.repository.PermissionRepository;
 import cn.yaofeng.finneen.system.resource.entity.Resource;
@@ -46,9 +47,12 @@ public class UserRepositoryTest {
 
     @Test
     public void testSaveUser() {
-        User user = new User();
+        /*User user = new User();
         user.setUserName("管理员");
-        user.setAccount("admin");
+        user.setAccount("admin");*/
+
+        User user = userRepository.findOne(1L);
+        user.setPassword(SecUtils.encoderByMd5With32Bit("admin"));
 
         User result = userRepository.save(user);
         Assert.assertEquals(user, result);
@@ -122,11 +126,11 @@ public class UserRepositoryTest {
 
     @Test
     public void findUser() {
-        User u = userRepository.findOne(1L);
+        User u = userRepository.findByAccount("admin");
         logger.info("user:{}", u);
 
 
-        logger.info("role:{}", ((Role)(u.getRoles().toArray()[0])).getRoleName());
+        //logger.info("role:{}", ((Role)(u.getRoles().toArray()[0])).getRoleName());
     }
 
     @Test

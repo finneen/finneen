@@ -1,4 +1,4 @@
-package cn.yaofeng.finneen.rest;
+package cn.yaofeng.finneen.monitor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class ServiceMonitor {
+public class ControllerMonitor {
 	
 	//private static final Logger logger = LoggerFactory.getLogger("service");
-	private static final Logger logger = LoggerFactory.getLogger(ServiceMonitor.class);
+	private static final Logger logger = LoggerFactory.getLogger(ControllerMonitor.class);
 	
 	@Around("execution(* cn.yaofeng.finneen*..*Controller.*(..))")
 	public Object logServiceTime(ProceedingJoinPoint joinPoint) throws Throwable{

@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByNameAndPassword(String name, String password) {
-        return null;
+    public User findByAccount(String account) {
+        return userRepository.findByAccount(account);
     }
+
 }
