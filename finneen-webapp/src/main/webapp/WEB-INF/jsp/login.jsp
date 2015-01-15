@@ -13,8 +13,8 @@
 <body>
 
 <form action="login" method="post">
-  用户名：<input name="account" type="text" />
-  密码：<input name="password" type="password" />
+  用户名：<input name="account" type="text" value="admin"/>
+  密码：<input name="password" type="password" value="admin"/>
   <input name="submit" type="submit" value="提交"/>
 </form>
 </body>

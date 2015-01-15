@@ -25,10 +25,13 @@ public class HomeController {
 	public Object hello(){
 		logger.info(st++ +"-hello-" + index++ + "-" + this.hashCode());
 		logger.error(new Exception("error") + "");
-		User user = new User();
-		user.setUserName("admin");
-		userService.save(user);
+
 		return userService.findAll();
+	}
+
+	@RequestMapping(value = "/hi")
+	public String hi() {
+		return "hi";
 	}
 
 

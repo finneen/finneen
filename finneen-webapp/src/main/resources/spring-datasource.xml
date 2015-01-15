@@ -22,17 +22,17 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
 		<property name="driverClassName">
-			<value>${db.springrain.driver}</value>
+			<value>${db.connection.driver}</value>
 		</property>
 		<property name="url">
-			<value>${db.springrain.url}</value>
+			<value>${db.connection.url}</value>
 		</property>
 
 		<property name="username">
-			<value>${db.springrain.username}</value>
+			<value>${db.connection.username}</value>
 		</property>
 		<property name="password">
-			<value>${db.springrain.password}</value>
+			<value>${db.connection.password}</value>
 		</property>
 		<property name="proxyFilters">
 			<list>
@@ -81,10 +81,6 @@
 		<property name="timeBetweenEvictionRunsMillis">
 			<value>60000</value>
 		</property>
-		<property name="numTestsPerEvictionRun">
-			<value>50</value>
-		</property>
-
 	</bean>
 
 

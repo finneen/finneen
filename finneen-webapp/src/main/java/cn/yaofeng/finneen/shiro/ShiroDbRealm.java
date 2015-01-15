@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
@@ -36,8 +37,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        //logger.info(principals.get);
-        return null;
+        logger.info("授权");
+        logger.info("user: {}", principals.getPrimaryPrincipal());
+
+        SimpleAuthorizationInfo sazi = new SimpleAuthorizationInfo();
+        sazi.addStringPermission("/hi");
+        sazi.addStringPermission("/hi/**");
+        sazi.addRole("role-1");
+        return sazi;
     }
 
     /**
