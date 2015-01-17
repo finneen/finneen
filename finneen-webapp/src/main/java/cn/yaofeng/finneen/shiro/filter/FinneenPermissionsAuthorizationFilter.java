@@ -1,5 +1,6 @@
 package cn.yaofeng.finneen.shiro.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
@@ -23,31 +24,37 @@ public class FinneenPermissionsAuthorizationFilter extends PermissionsAuthorizat
 	@Override
 	public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
 
-		Boolean isPermitted = Boolean.TRUE;
+		Boolean isPermitted = Boolean.FALSE;
 
 		Subject subject  = SecurityUtils.getSubject();
-
-		//Subject subject = getSubject(request, response);
-
-
-		logger.info("{}", mappedValue);
-
-
-		logger.info("{}, {}", subject.getPrincipals());
-
+		HttpServletRequest req = (HttpServletRequest) request;
 
 		logger.info("{}", subject.isAuthenticated());
+		if(subject.isAuthenticated()) {
+			String contextPath = req.getContextPath();
+			String uri = req.getRequestURI();
 
-		logger.info("{}", subject.isPermitted("/hi"));
+			int i = uri.indexOf(contextPath);
+			if(i>-1){
+				uri = uri.substring(i+contextPath.length());
+			}
+			if(StringUtils.isBlank(uri)){
+				uri="/";
+			}
 
-		logger.info("{}", subject.hasRole("role"));
-		logger.info("{}", subject.hasRole("role-1"));
+			if("/".equals(uri)){
+				isPermitted = Boolean.TRUE;
+			} else {
+				isPermitted= subject.isPermitted(uri);
+			}
 
+			logger.info("{}", subject.isPermitted(uri));
 
+		} else {
+			//未登录
 
-		logger.info("{}", subject.getPrincipal());
+		}
 
-		HttpServletRequest req = (HttpServletRequest) request;
 
 		logger.info("uri: {}, url: {}, host: {}", req.getRequestURI(), req.getRequestURL(), subject.getSession().getHost());
 

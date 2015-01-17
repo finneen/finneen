@@ -18,7 +18,7 @@ public class Permission extends BaseEntity<Long> {
     @Column(nullable = false, unique = true)
     private String permissionName;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "t_sys_perm_res", joinColumns = {@JoinColumn(name = "perm_id")},
         inverseJoinColumns = {@JoinColumn(name = "res_id")})
     private Set<Resource> resources = new HashSet<Resource>();

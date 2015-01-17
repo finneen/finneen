@@ -61,7 +61,9 @@ public class UserRepositoryTest {
     @Test
     public void testSaveResource() {
         Resource resource = new Resource();
-        resource.setResourceName("res-1");
+        resource.setResourceName("用户管理");
+        resource.setIdentify("user");
+        resource.setUrl("/user/list");
 
         resourceRepository.save(resource);
     }
@@ -69,9 +71,9 @@ public class UserRepositoryTest {
     @Test
     public void testSavePermission() {
         Permission permission = new Permission();
-        permission.setPermissionName("perm-1");
+        permission.setPermissionName("perm-2");
 
-        //Permission permission = permissionRepository.findOne(1L);
+        //Permission permission = permissionRepository.findOne(4L);
         Resource resource = resourceRepository.findOne(1L);
 
         permission.addResource(resource);
@@ -95,7 +97,7 @@ public class UserRepositoryTest {
     @Test
     public void testSaveRolePermission() {
 
-        Permission permission = permissionRepository.findOne(1L);
+        Permission permission = permissionRepository.findOne(4L);
 
         Role role = new Role();
         role.setRoleName("role");
@@ -112,7 +114,7 @@ public class UserRepositoryTest {
 
         //roleRepository.save(role);
 
-        Role r = roleRepository.findOne(2L);
+        Role r = roleRepository.findOne(1L);
         /*Role r = new Role();
         r.setRoleName("rol-1");*/
 

@@ -41,6 +41,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
         logger.info("user: {}", principals.getPrimaryPrincipal());
 
         SimpleAuthorizationInfo sazi = new SimpleAuthorizationInfo();
+
+        String account = (String) principals.getPrimaryPrincipal();
+        User user = userService.findByAccount(account);
+        logger.info("user: {}", user);
         sazi.addStringPermission("/hi");
         sazi.addStringPermission("/hi/**");
         sazi.addRole("role-1");

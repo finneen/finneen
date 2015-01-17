@@ -61,4 +61,9 @@ public class LoginController extends BaseController {
     public String index() {
         return "index";
     }
+
+    @RequestMapping(value = "/unauth", method = RequestMethod.GET)
+    public String unauth() {
+        return "unauth";
+    }
 }
