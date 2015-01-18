@@ -3,11 +3,11 @@ package cn.yaofeng.finneen.secutiry.web.controller;
 import cn.yaofeng.finneen.core.controller.BaseController;
 import cn.yaofeng.finneen.system.user.entity.User;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,20 +39,9 @@ public class LoginController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassword());
 
+        logger.info("host: {}", token.getHost());
 
-        try {
-            subject.login(token);
-        } catch (UnknownAccountException uae) {
-            logger.error("用户名不存在", uae);
-            throw uae;
-        } catch (IncorrectCredentialsException ice) {
-            logger.error("密码错误", ice);
-            throw ice;
-        } catch (Exception e) {
-            logger.error("未知错误", e);
-            throw e;
-        }
-
+        subject.login(token);
 
         return redirect + "/";
     }

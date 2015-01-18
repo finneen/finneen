@@ -14,8 +14,24 @@ public class ControllerMonitor {
 	//private static final Logger logger = LoggerFactory.getLogger("service");
 	private static final Logger logger = LoggerFactory.getLogger(ControllerMonitor.class);
 	
-	@Around("execution(* cn.yaofeng.finneen*..*Controller.*(..))")
+	@Around("execution(* cn.yaofeng.finneen*..*Service.*(..))")
 	public Object logServiceTime(ProceedingJoinPoint joinPoint) throws Throwable{
+		long start = System.currentTimeMillis();
+		Object obj = joinPoint.proceed();
+		logger.info(joinPoint.toString() + " time: " + (System.currentTimeMillis() - start) + "ms");
+		return obj;
+	}
+
+	@Around("execution(* cn.yaofeng.finneen*..*Repository.*(..))")
+	public Object logRepositoryTime(ProceedingJoinPoint joinPoint) throws Throwable{
+		long start = System.currentTimeMillis();
+		Object obj = joinPoint.proceed();
+		logger.info(joinPoint.toString() + " time: " + (System.currentTimeMillis() - start) + "ms");
+		return obj;
+	}
+
+	@Around("execution(* cn.yaofeng.finneen*..*Controller.*(..))")
+	public Object logControllerTime(ProceedingJoinPoint joinPoint) throws Throwable{
 		long start = System.currentTimeMillis();
 		Object obj = joinPoint.proceed();
 		logger.info(joinPoint.toString() + " time: " + (System.currentTimeMillis() - start) + "ms");

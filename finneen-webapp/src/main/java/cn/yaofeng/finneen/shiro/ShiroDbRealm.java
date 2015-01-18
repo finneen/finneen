@@ -1,7 +1,11 @@
 package cn.yaofeng.finneen.shiro;
 
+import cn.yaofeng.finneen.system.permission.entity.Permission;
+import cn.yaofeng.finneen.system.permission.service.PermissionService;
+import cn.yaofeng.finneen.system.role.entity.Role;
 import cn.yaofeng.finneen.system.user.entity.User;
 import cn.yaofeng.finneen.system.user.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Set;
 
 /**
  * 认证授权
@@ -33,21 +38,35 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PermissionService permissionService;
 
+    /**
+     * 授权
+     *
+     * @param principals
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
         logger.info("授权");
         logger.info("user: {}", principals.getPrimaryPrincipal());
 
+        String account = (String) principals.getPrimaryPrincipal();
+
+        if(StringUtils.isBlank(account)) {
+            return null;
+        }
+
         SimpleAuthorizationInfo sazi = new SimpleAuthorizationInfo();
 
-        String account = (String) principals.getPrimaryPrincipal();
         User user = userService.findByAccount(account);
+
         logger.info("user: {}", user);
-        sazi.addStringPermission("/hi");
-        sazi.addStringPermission("/hi/**");
-        sazi.addRole("role-1");
+
+        Set<String> permissions = permissionService.findPermissionsByUser(user);
+        sazi.addStringPermissions(permissions);
         return sazi;
     }
 

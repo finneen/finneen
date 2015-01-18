@@ -153,5 +153,24 @@ public class UserRepositoryTest {
             }
         }));
 
+        Set<String> resource_str = null;
+
+        for (Role role : roles) {
+            Set<Permission> permissions = role.getPermissions();
+
+            for (Permission permission : permissions) {
+                Set<Resource> resources = permission.getResources();
+
+                resource_str = Sets.newHashSet(Collections2.transform(resources, new Function<Resource, String>() {
+                    @Override
+                    public String apply(Resource input) {
+                        return input.getUrl();
+                    }
+                }));
+            }
+        }
+
+        logger.info("{}", resource_str);
+
     }
 }

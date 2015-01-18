@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "t_sys_user")
-public class User extends BaseEntity<Long>{
+public class User extends BaseEntity<Long> {
 
     @Column(nullable = false)
     private String userName;

@@ -53,6 +53,7 @@
 				/unauth = anon
 				/login = anon
 				/favicon.ico = anon
+				/resources/** = anon
 				/index = user
 				/logout = logout
 				/** = user, finneenpers

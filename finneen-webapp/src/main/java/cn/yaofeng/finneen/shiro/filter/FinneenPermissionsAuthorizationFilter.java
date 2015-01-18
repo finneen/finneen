@@ -19,45 +19,42 @@ import java.io.IOException;
 @Component(value = "finneenpers")
 public class FinneenPermissionsAuthorizationFilter extends PermissionsAuthorizationFilter {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Override
-	public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
+    @Override
+    public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
 
-		Boolean isPermitted = Boolean.FALSE;
+        Boolean isPermitted = Boolean.FALSE;
 
-		Subject subject  = SecurityUtils.getSubject();
-		HttpServletRequest req = (HttpServletRequest) request;
+        Subject subject = SecurityUtils.getSubject();
+        HttpServletRequest req = (HttpServletRequest) request;
 
-		logger.info("{}", subject.isAuthenticated());
-		if(subject.isAuthenticated()) {
-			String contextPath = req.getContextPath();
-			String uri = req.getRequestURI();
+        if (subject.isAuthenticated()) {
+            String contextPath = req.getContextPath();
+            String uri = req.getRequestURI();
 
-			int i = uri.indexOf(contextPath);
-			if(i>-1){
-				uri = uri.substring(i+contextPath.length());
-			}
-			if(StringUtils.isBlank(uri)){
-				uri="/";
-			}
+            int i = uri.indexOf(contextPath);
+            if (i > -1) {
+                uri = uri.substring(i + contextPath.length());
+            }
+            if (StringUtils.isBlank(uri)) {
+                uri = "/";
+            }
 
-			if("/".equals(uri)){
-				isPermitted = Boolean.TRUE;
-			} else {
-				isPermitted= subject.isPermitted(uri);
-			}
+            if ("/".equals(uri)) {
+                isPermitted = Boolean.TRUE;
+            } else {
+                isPermitted = subject.isPermitted(uri);
+            }
 
-			logger.info("{}", subject.isPermitted(uri));
+        } else {
+            //未登录
 
-		} else {
-			//未登录
-
-		}
+        }
 
 
-		logger.info("uri: {}, url: {}, host: {}", req.getRequestURI(), req.getRequestURL(), subject.getSession().getHost());
+        logger.info("uri: {}, url: {}, host: {}", req.getRequestURI(), req.getRequestURL(), subject.getSession().getHost());
 
-		return isPermitted;
-	}
+        return isPermitted;
+    }
 }
