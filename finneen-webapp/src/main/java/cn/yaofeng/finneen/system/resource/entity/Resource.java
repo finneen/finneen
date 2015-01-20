@@ -1,10 +1,10 @@
 package cn.yaofeng.finneen.system.resource.entity;
 
 import cn.yaofeng.finneen.core.entity.BaseEntity;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Finneen on 2015/1/11.
@@ -32,7 +32,12 @@ public class Resource extends BaseEntity<Long> {
     /**
      * 资源对应父id
      */
-    private String pid;
+    @JoinColumn(name = "pid")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Resource parent;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parent")
+    private Set<Resource> children;
 
     /**
      * 对资源的描述
@@ -64,7 +69,6 @@ public class Resource extends BaseEntity<Long> {
      */
     private Integer state;
 
-
     public String getResourceName() {
         return resourceName;
     }
@@ -89,12 +93,20 @@ public class Resource extends BaseEntity<Long> {
         this.url = url;
     }
 
-    public String getPid() {
-        return pid;
+    public Resource getParent() {
+        return parent;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setParent(Resource parent) {
+        this.parent = parent;
+    }
+
+    public Set<Resource> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Resource> children) {
+        this.children = children;
     }
 
     public Integer getDescription() {
@@ -135,5 +147,14 @@ public class Resource extends BaseEntity<Long> {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+    
+    public void addChildren(Resource resource) {
+        children.add(resource);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

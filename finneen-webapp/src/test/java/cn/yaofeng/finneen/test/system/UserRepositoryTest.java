@@ -9,10 +9,10 @@ import cn.yaofeng.finneen.system.role.entity.Role;
 import cn.yaofeng.finneen.system.role.repository.RoleRepository;
 import cn.yaofeng.finneen.system.user.entity.User;
 import cn.yaofeng.finneen.system.user.repository.UserRepository;
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.jws.soap.SOAPBinding;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Set;
 
@@ -47,11 +47,11 @@ public class UserRepositoryTest {
 
     @Test
     public void testSaveUser() {
-        /*User user = new User();
+        User user = new User();
         user.setUserName("管理员");
-        user.setAccount("admin");*/
+        user.setAccount("admin");
 
-        User user = userRepository.findOne(1L);
+        //User user = userRepository.findOne(1L);
         user.setPassword(SecUtils.encoderByMd5With32Bit("admin"));
 
         User result = userRepository.save(user);
@@ -61,29 +61,43 @@ public class UserRepositoryTest {
     @Test
     public void testSaveResource() {
         Resource resource = new Resource();
-        resource.setResourceName("用户管理");
-        resource.setIdentify("user");
-        resource.setUrl("/user/list");
+        resource.setResourceName("root");
+        resource.setUrl("/root");
 
         resourceRepository.save(resource);
     }
-
+    
+    @Test
+    public void testSaveResourceTree() {
+        Resource root = resourceRepository.findOne(1L);
+        
+        Resource children1 = new Resource();
+        children1.setResourceName("children2");
+        children1.setUrl("/url/2");
+        children1.setParent(root);
+        
+        root.addChildren(children1);
+        
+        resourceRepository.save(root);
+        
+    }
+    
     @Test
     public void testSavePermission() {
-        Permission permission = new Permission();
-        permission.setPermissionName("perm-2");
+        //Permission permission = new Permission();
+        //permission.setPermissionName("perm-2");
 
-        //Permission permission = permissionRepository.findOne(4L);
-        Resource resource = resourceRepository.findOne(1L);
+        Permission permission = permissionRepository.findOne(1L);
+        Resource resource = resourceRepository.findOne(2L);
 
         permission.addResource(resource);
 
         permissionRepository.save(permission);
     }
 
-    @Test
+    //@Test
     public void testDelResource() {
-        Permission permission = permissionRepository.findOne(2L);
+        Permission permission = permissionRepository.findOne(1L);
 
         Resource resource = resourceRepository.findOne(1L);
 
@@ -97,7 +111,7 @@ public class UserRepositoryTest {
     @Test
     public void testSaveRolePermission() {
 
-        Permission permission = permissionRepository.findOne(4L);
+        Permission permission = permissionRepository.findOne(1L);
 
         Role role = new Role();
         role.setRoleName("role");

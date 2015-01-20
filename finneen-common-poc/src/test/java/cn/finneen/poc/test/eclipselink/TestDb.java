@@ -2,6 +2,7 @@ package cn.finneen.poc.test.eclipselink;
 
 import cn.finneen.poc.eclipselink.entity.Address;
 import cn.finneen.poc.eclipselink.entity.Customer;
+import cn.finneen.poc.eclipselink.entity.Resource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,5 +66,25 @@ public class TestDb {
 		for(Customer c: customers) {
 			System.out.println(c);
 		}
+	}
+	
+	@Test
+	public void test2() {
+		Resource root = new Resource();
+		root.setResourceName("root");
+		
+		Resource children1 = new Resource();
+		children1.setParent(root);
+		children1.setResourceName("c1");
+		
+		Resource children2 = new Resource();
+		children2.setParent(root);
+		children2.setResourceName("c2");
+		
+		root.addChildren(children1);
+		root.addChildren(children2);
+
+		em.persist(root);
+		
 	}
 }

@@ -40,6 +40,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
+    
+    public ShiroDbRealm() {
+        super.setCachingEnabled(false);
+    }
 
     /**
      * 授权

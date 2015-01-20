@@ -8,12 +8,13 @@
 
 		<class>cn.finneen.poc.eclipselink.entity.Customer</class>
 		<class>cn.finneen.poc.eclipselink.entity.Address</class>
+		<class>cn.finneen.poc.eclipselink.entity.Resource</class>
 
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.134:5432/ambari"/>
-			<property name="javax.persistence.jdbc.user" value="ambari"/>
-			<property name="javax.persistence.jdbc.password" value="bigdata"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/finneen"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
 			<property name="eclilselink.show_sql" value="true"/>
