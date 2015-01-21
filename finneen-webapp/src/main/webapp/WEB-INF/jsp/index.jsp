@@ -37,7 +37,8 @@
 
             <div class="widget-body">
               <div class="widget-main padding-8">
-                <div id="tree1" class="tree"></div>
+                <%--<div id="tree1" class="tree"></div>--%>
+                <ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
               </div>
             </div>
           </div>
@@ -57,7 +58,7 @@
           </div>
         </div>
       </div>
-
+      <%--<ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>--%>
       <script type="text/javascript">
         var $assets = "assets";//this will be used in fuelux.tree-sampledata.js
       </script>
@@ -65,6 +66,7 @@
       <!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->
   </div><!-- /.row -->
+
 </div>
 
   <%@include file="/WEB-INF/jsp/commons/import-js.jspf" %>

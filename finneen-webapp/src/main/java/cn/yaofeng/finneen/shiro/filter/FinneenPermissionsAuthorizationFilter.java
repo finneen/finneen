@@ -53,7 +53,7 @@ public class FinneenPermissionsAuthorizationFilter extends PermissionsAuthorizat
         }
 
 
-        logger.info("uri: {}, url: {}, host: {}", req.getRequestURI(), req.getRequestURL(), subject.getSession().getHost());
+        logger.info("uri: {}, url: {}, host: {}, isPermitted: {}", req.getRequestURI(), req.getRequestURL(), subject.getSession().getHost(), isPermitted);
 
         return isPermitted;
     }

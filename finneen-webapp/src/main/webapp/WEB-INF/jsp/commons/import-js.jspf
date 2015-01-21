@@ -44,6 +44,8 @@ window.jQuery || document.write("<script src='${ctx}/resources/assets/js/jquery-
 
 <!-- inline scripts related to this page -->
 
+<script type="text/javascript" src="${ctx}/resources/ztree/js/jquery.ztree.core-3.5.js"></script>
+
 
 <!-- addiction javascript -->
 <script src="${ctx}/resources/js/common.js"></script>

@@ -9,3 +9,6 @@
 <![endif]-->
 
 <link rel="stylesheet" href="${ctx}/resources/assets/css/ace-skins.min.css"/>
+
+
+<link rel="stylesheet" href="${ctx}/resources/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">

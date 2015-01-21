@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/resource")
@@ -27,19 +26,33 @@ public class ResourceController extends BaseController {
     
     
     @ResponseBody
-    @RequestMapping(value = "/tree/{pid}")
-    public Object tree(@PathVariable Long pid) {
-        List<Resource> resourceList = resourceService.findByPid(pid);
-
-        Map<String, TreeVO> tree = new HashMap<String, TreeVO>();
+    @RequestMapping(value = "/tree")
+    public Object tree(HttpServletRequest request) {
+        String pid_str = request.getParameter("pid");
+        Long pid = Long.parseLong(pid_str);
+        List<Resource> resourceList = resourceService.findAll();
+        
+        List<TreeVO> treeVOs = new ArrayList<TreeVO>();
         
         for (Resource resource : resourceList) {
-            TreeVO treeVO = new TreeVO();
-            treeVO.setName(resource.getResourceName());
-            treeVO.setType("folder");
-            treeVO.setId(resource.getId());
-            tree.put(resource.getId().toString(), treeVO);
+            treeVOs.add(coverToTree(resource));
         }
-        return tree;
+
+        return treeVOs;
     }
+    
+    public TreeVO coverToTree(Resource resource) {        
+        TreeVO treeVO = new TreeVO();
+        treeVO.setId(resource.getId());
+        treeVO.setName(resource.getResourceName());
+        if (resource.getParent() != null) {
+            treeVO.setPid(resource.getParent().getId());
+        } else {
+            treeVO.setParent(true);
+            treeVO.setOpen(true);
+        }
+        return treeVO;
+    }
+    
+
 }
