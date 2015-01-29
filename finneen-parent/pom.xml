@@ -37,6 +37,7 @@
 		<mysql-connector-java.version>5.1.32</mysql-connector-java.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
 		<guava.version>15.0</guava.version>
+        <sitemesh.version>2.4.2</sitemesh.version>
 	</properties>
 
 	<build>
@@ -320,6 +321,12 @@
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
 			</dependency>
+
+            <dependency>
+                <groupId>opensymphony</groupId>
+                <artifactId>sitemesh</artifactId>
+                <version>${sitemesh.version}</version>
+            </dependency>
 
 		</dependencies>
 	</dependencyManagement>

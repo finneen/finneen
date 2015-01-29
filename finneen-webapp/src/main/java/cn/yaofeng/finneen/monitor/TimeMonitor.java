@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class ControllerMonitor {
+public class TimeMonitor {
 	
 	//private static final Logger logger = LoggerFactory.getLogger("service");
-	private static final Logger logger = LoggerFactory.getLogger(ControllerMonitor.class);
+	private static final Logger logger = LoggerFactory.getLogger(TimeMonitor.class);
 	
 	@Around("execution(* cn.yaofeng.finneen*..*Service.*(..))")
 	public Object logServiceTime(ProceedingJoinPoint joinPoint) throws Throwable{

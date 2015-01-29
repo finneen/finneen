@@ -151,6 +151,11 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+        </dependency>
+
 	</dependencies>
 	<build>
 		<finalName>finneen</finalName>
