@@ -84,10 +84,10 @@ public class UserRepositoryTest {
     
     @Test
     public void testSavePermission() {
-        //Permission permission = new Permission();
-        //permission.setPermissionName("perm-2");
+        Permission permission = new Permission();
+        permission.setPermissionName("perm-2");
 
-        Permission permission = permissionRepository.findOne(1L);
+       // Permission permission = permissionRepository.findOne(1L);
         Resource resource = resourceRepository.findOne(2L);
 
         permission.addResource(resource);
@@ -128,7 +128,7 @@ public class UserRepositoryTest {
 
         //roleRepository.save(role);
 
-        Role r = roleRepository.findOne(1L);
+        Role r = roleRepository.findOne(2L);
         /*Role r = new Role();
         r.setRoleName("rol-1");*/
 
